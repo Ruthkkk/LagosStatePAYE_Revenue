@@ -1,0 +1,74 @@
+--All the data in the table
+SELECT *
+FROM paye_data;
+
+
+-- Total Revenue Analysis
+--What is the total revenue collected 
+SELECT SUM(Cr_Amount) AS TotalRevenue
+FROM paye_data;
+
+
+--Top Agencies
+--What is the revenue share contributed by the top 5 agencies?
+SELECT TOP 5 Agency_Name, SUM(Cr_Amount) AS TotalRevenue
+FROM paye_data
+GROUP BY Agency_Name
+ORDER BY TotalRevenue DESC;
+--How many entries does the top agency have?
+SELECT TOP 1 Agency_Name, COUNT(EntryID) AS EntryCount
+FROM paye_data
+GROUP BY Agency_Name
+ORDER BY EntryCount DESC;
+
+
+--Revenue Distribution
+-- What is the distribution of revenue across different revenue codes?
+SELECT Revenue_Code, SUM(Cr_Amount) AS TotalRevenue
+FROM paye_data
+GROUP BY Revenue_Code
+ORDER BY TotalRevenue DESC;
+-- Which revenue code has the highest total revenue?
+SELECT TOP 1 Revenue_Code, SUM(Cr_Amount) AS TotalRevenue
+FROM paye_data
+GROUP BY Revenue_Code
+ORDER BY TotalRevenue DESC;
+--What is the distribution of revenue across different Agencies?
+SELECT Agency_Name, SUM(Cr_Amount) AS TotalRevenue
+FROM paye_data
+GROUP BY Agency_Name
+ORDER BY TotalRevenue DESC;
+
+
+--Top Transactions
+-- Which top 3 transactions has the highest credit (Cr Amount)?
+SELECT TOP 3 EntryID, Agency_Name, Cr_Amount, Revenue_Name
+FROM paye_data
+ORDER BY Cr_Amount DESC;
+
+
+--Revenue Name Breakdown:
+--What is the total revenue for each revenue name?
+SELECT Revenue_Name, SUM(Cr_Amount) AS TotalRevenue
+FROM paye_data
+GROUP BY Revenue_Name
+ORDER BY TotalRevenue DESC;
+
+--Highest and Lowest PAYE amount
+SELECT MAX(Cr_Amount) AS HighestPaymentAmount, MIN(Cr_Amount) AS LowestPaymentAmount
+FROM paye_data;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
